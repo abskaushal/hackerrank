@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class CutTheSticksTester {
 
+
 	int[] nullArray;
 	static int[] emptyArray;
 	static int[] shortArray;
