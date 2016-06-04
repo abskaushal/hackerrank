@@ -60,7 +60,7 @@ public class MergeSort {
         }
     }
     
-    /** Perform MergeSort recursively
+    /** Perform MergeSort recursively on two arrays
      * @param arr	array to be sorted
      * @param first	beginning index
      * @param last ending index
