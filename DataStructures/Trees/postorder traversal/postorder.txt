@@ -8,13 +8,11 @@ class Node {
 }
 
 */
-
-void Preorder(Node root) {
-        if(root == null)
+void Postorder(Node root) {
+if(root == null)
            return;
     
+        Postorder(root.left);
+        Postorder(root.right);
         System.out.print(root.data+" ");
-        Preorder(root.left);
-        Preorder(root.right);
-    
 }
