@@ -1,0 +1,25 @@
+/*
+   class Node 
+       int data;
+       Node left;
+       Node right;
+*/
+void top_view(Node root)
+{
+
+    Node temp = root;
+    Stack s = new Stack<>();
+    while(temp!=null){
+        s.add(temp.data);
+        temp = temp.left;
+    }
+    int size = s.size()-1;
+		for(int i=size; i>=0; i--){
+			System.out.print(s.get(i)+" ");
+		}
+    
+    while(root.right!=null){
+        root=root.right;
+        System.out.print(root.data+" ");
+    }
+}
