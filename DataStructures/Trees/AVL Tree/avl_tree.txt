@@ -1,0 +1,85 @@
+   /* Class node is defined as :
+    class Node 
+       int val;   //Value
+       int ht;      //Height
+       Node left;   //Left child
+       Node right;   //Right child
+
+   */
+
+   static Node insert(Node root,int val)
+    {
+       if(root == null){
+           Node t = new Node();
+           t.val = val;
+           t.ht = 0;
+           return t;
+       }
+       
+       if(root.val <= val){
+           root.right = insert(root.right,val);
+       }else{
+           root.left = insert(root.left,val);
+       }
+       
+       setHeight(root);
+       int bal =  balance(root.left, root.right);
+       
+       if(bal > 1){
+            if(height(root.left.left) >= height(root.left.right)){
+                root = rotateRight(root);
+            }else{
+                root.left = rotateLeft(root.left);
+                root = rotateRight(root);
+            }
+        }else if(bal < -1){
+            if(height(root.right.right) > height(root.right.left)){
+                root = rotateLeft(root);
+            }else{
+                root.right = rotateRight(root.right);
+                root = rotateLeft(root);
+            }
+        }
+        else{
+            root.ht = setHeight(root);
+        }
+       
+       return root;
+    }
+
+    static Node rotateLeft(Node root){
+        Node newRoot = root.right;
+        root.right = root.right.left;
+        newRoot.left = root;
+        root.ht = setHeight(root);
+        newRoot.ht = setHeight(newRoot);
+        return newRoot;
+    }
+    
+    static Node rotateRight(Node root){
+        Node newRoot = root.left;
+        root.left = root.left.right;
+        newRoot.right = root;
+        root.ht = setHeight(root);
+        newRoot.ht = setHeight(newRoot);
+        return newRoot;
+    }
+
+    static int setHeight(Node node){
+        if(node == null){
+            return 0;
+        }
+       return 1 + Math.max((node.left!=null?node.left.ht:-1),(node.right!=null?node.right.ht:-1));
+    }
+
+    static int height(Node root){
+        if(root == null){
+            return -1;
+        }else {
+            return root.ht;
+        }
+    }
+
+    static int balance(Node rootLeft, Node rootRight){
+        return height(rootLeft) - height(rootRight);
+    }
